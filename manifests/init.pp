@@ -44,7 +44,8 @@ class cassandra(
     $disk_failure_policy        = $cassandra::params::disk_failure_policy,
     $thread_stack_size          = $cassandra::params::thread_stack_size,
     $service_enable             = $cassandra::params::service_enable,
-    $service_ensure             = $cassandra::params::service_ensure
+    $service_ensure             = $cassandra::params::service_ensure,
+    $enable_auth                = $cassandra::params::enable_auth
 ) inherits cassandra::params {
     # Validate input parameters
     validate_bool($include_repo)
@@ -72,6 +73,7 @@ class cassandra(
     validate_re("${thread_stack_size}", '^[0-9]+$')
     validate_re($service_enable, '^(true|false)$')
     validate_re($service_ensure, '^(running|stopped)$')
+    validate_re($enable_auth, '^(true|false)$')
 
     validate_array($additional_jvm_opts)
     validate_array($seeds)

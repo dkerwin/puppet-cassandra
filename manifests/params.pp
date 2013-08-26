@@ -261,4 +261,9 @@ class cassandra::params {
         undef   => 'running',
         default => $::cassandra_service_ensure,
     }
+
+    $enable_auth = $::cassandra_enable_auth ? {
+        undef   => 'false',
+        default => $::cassandra_enable_auth,
+    }
 }
